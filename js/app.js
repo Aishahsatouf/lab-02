@@ -3,17 +3,17 @@
 
 var optionList = [];
 
-let data = $.ajax('data/page-1.json')
+$.ajax('data/page-1.json')
     .then(data => {
 
         data.forEach((element) => {
             let newGallary = new Gallary(element);
-            newGallary.render();
+            newGallary.page2Render();;
         })
-
+        $('#photo-template').first().remove();
         $('#option').first().remove();
         renderOption();
-    })
+    }) 
 
 let gallaries = [];
 
@@ -36,7 +36,6 @@ $('button').on('click', function () {
         $('#keywordList').empty();
         $.ajax('data/page-2.json')
             .then(data2 => {
-                // console.log(data2)
                 data2.forEach((element2) => {
                     let page2Gallary = new Gallary(element2);
                     page2Gallary.page2Render();
@@ -49,11 +48,8 @@ $('button').on('click', function () {
 
             })
     } else if (this.id === 'page1') {
-
-
         gallaries = [];
         optionList = [];
-
         $('#photo-template').hide();
         $('#keywordList').empty();
         $.ajax('data/page-1.json')
